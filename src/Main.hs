@@ -1,32 +1,9 @@
--- Dla danej liczby naturalnej n ≤ 10000 podaj listę liczb naturalnych z przedziału domkniętego [1, n]
--- które mogą być zapisane przy pomocy sumy dwóch liczb obfitych2
--- . Lista musi zawierać unikalne
--- wartości posortowane w kolejności rosnącej.
+-- Dla danej liczby naturalnej n podaj najmniejszą liczbę naturalną m ≥ n z której można utworzyć
+-- zbiór A składający się z dwóch rodzajów elementów x i y o mocy |A| = |x|+|y|=m gdzie |x| ≥ |y|.
+-- Prawdopodobieństwo wylosowania dwóch elementów x ze zbioru A powinno być równe ½.
 
-import Data.Char (generalCategory)
-import Data.List ()
-import Text.ParserCombinators.ReadPrec (reset)
-
-obfita :: Integer -> Bool
-obfita n = wynik
-  where
-    dzielnki = [x | x <- [1 .. (n -1)], n `rem` x == 0]
-    wynik = sum dzielnki > n
-
-liczbyObfite :: Integer -> [Integer]
-liczbyObfite n = liczby_obfite
-  where
-    liczby_obfite = [x | x <- [0 .. n], obfita x]
-
--- mozna zapisac przy pomocy 2 liczb ofbitych
-czyMoznaLiczbe :: Integer -> Bool
-czyMoznaLiczbe n = wynik
-  where
-    liczby = liczbyObfite n
-    wszystkoZeWszystkim = [x + y | x <- liczby, y <- liczby]
-    wynik = n `elem` wszystkoZeWszystkim
-
-dupa :: Integer -> [Integer]
-dupa n = wynik
-  where
-    wynik = [x | x <- [1 .. n], czyMoznaLiczbe x]
+-- 4 Kontrliczba to liczba powstała przez odwrócenie kolejności cyfr. Dla 3476576 kontrliczbą będzie 6756743. Dla liczb
+-- kończących jednym bądź większą liczbą zer kontrliczba będzie ich pozbawiona na początku. Kontrliczbą 138000
+-- będzie 831.
+-- Przykładowo dla n=20, m=21, |x| = 15 a |y| = 6, prawdopodobieństwo wylosowania dwóch
+-- elementów x = P(xx) = (15/21)*(14/20) = 1/2.
