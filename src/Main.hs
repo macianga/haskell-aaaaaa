@@ -26,7 +26,7 @@ czyMoznaLiczbe n = wynik
     wszystkoZeWszystkim = [x + y | x <- liczby, y <- liczby]
     wynik = n `elem` wszystkoZeWszystkim
 
-dupa :: Integer -> [Integer]
-dupa n = wynik
+zad2 :: Integer -> [Integer]
+zad2 n = wynik
   where
     wynik = [x | x <- [1 .. n], czyMoznaLiczbe x]
