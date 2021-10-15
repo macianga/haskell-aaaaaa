@@ -1,4 +1,4 @@
-# zadania na projekt z haskella
+# zadania na projekt z haskella :rofl::rofl::rofl::rofl::rofl::rofl:
 
 ## Zadanie nr 10
 branch: zad1
