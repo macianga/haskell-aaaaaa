@@ -1,21 +1,32 @@
+-- Dla danej liczby naturalnej n ≤ 10000 podaj listę liczb naturalnych z przedziału domkniętego [1, n]
+-- które mogą być zapisane przy pomocy sumy dwóch liczb obfitych2
+-- . Lista musi zawierać unikalne
+-- wartości posortowane w kolejności rosnącej.
+
 import Data.Char (generalCategory)
 import Data.List ()
 import Text.ParserCombinators.ReadPrec (reset)
 
-generate :: (Integer, Integer) -> (Integer, Integer, Integer)
-generate (i, j) = (a, b, c)
+obfita :: Integer -> Bool
+obfita n = wynik
   where
-    a = i ^ 2 - j ^ 2
-    b = 2 * i * j
-    c = i ^ 2 + j ^ 2
+    dzielnki = [x | x <- [1 .. (n -1)], n `rem` x == 0]
+    wynik = sum dzielnki > n
 
-isMinimal :: (Integer, Integer, Integer) -> Bool
-isMinimal (a, b, c) = res
+liczbyObfite :: Integer -> [Integer]
+liczbyObfite n = liczby_obfite
   where
-    x = gcd a (gcd b c)
-    res = x == 1
+    liczby_obfite = [x | x <- [0 .. n], obfita x]
 
-somfunc :: (Integer, Integer, Integer) -> (Integer, Integer, Integer)
-somfunc (i, j, n) = (a, b, c)
+-- mozna zapisac przy pomocy 2 liczb ofbitych
+czyMoznaLiczbe :: Integer -> Bool
+czyMoznaLiczbe n = wynik
   where
-    (a, b, c) = generate (i, j)
+    liczby = liczbyObfite n
+    wszystkoZeWszystkim = [x + y | x <- liczby, y <- liczby]
+    wynik = n `elem` wszystkoZeWszystkim
+
+dupa :: Integer -> [Integer]
+dupa n = wynik
+  where
+    wynik = [x | x <- [1 .. n], czyMoznaLiczbe x]
