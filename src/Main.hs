@@ -25,4 +25,8 @@ pit x = wynoik
 trojkipit :: Integer -> [[Integer]]
 trojkipit n = trojkiWynik
   where
-    trojkiWynik = [x | x <- trojki n, pit x, sum x == n]
+    asd = [x | x <- trojki n, pit x, sum x == n]
+    trojkiWynik =
+      if length asd == 0
+        then if n > 11 then trojkipit (n -1) else []
+        else asd
