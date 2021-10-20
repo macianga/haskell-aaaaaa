@@ -1,6 +1,5 @@
 -- Dla podanej liczby n podaj, jeśli to możliwe, trójkę pitagorejską a, b, c taką, że a + b + c = n. Dla n =
--- 12 jest nią odpowiednio: (3, 4, 5) ponieważ 32 + 42 = 5
--- 2
+-- 12 jest nią odpowiednio: (3, 4, 5) ponieważ 3^2 + 4^2 = 5^2
 -- . Dodatkowo należy narzucić ograniczenie,
 -- aby generować tylko pierwotne trójki pitagorejskie. Przykładowo (6, 8, 10) nie jest pierwotną trójką
 -- pitagorejską bo wszystkie jej wartości mają wspólny dzielnik równy 2. Jeśli to niemożliwe podaj
@@ -10,20 +9,20 @@ import Data.Char (generalCategory)
 import Data.List ()
 import Text.ParserCombinators.ReadPrec (reset)
 
-generate :: (Integer, Integer) -> (Integer, Integer, Integer)
-generate (i, j) = (a, b, c)
-  where
-    a = i ^ 2 - j ^ 2
-    b = 2 * i * j
-    c = i ^ 2 + j ^ 2
+trojki :: Integer -> [[Integer]]
+trojki n = [[x, y, z] | x <- [1 .. n], y <- [1 .. n], z <- [1 .. n]]
 
-isMinimal :: (Integer, Integer, Integer) -> Bool
-isMinimal (a, b, c) = res
+pit :: [Integer] -> Bool
+pit x = wynoik
   where
-    x = gcd a (gcd b c)
-    res = x == 1
+    wynoik = (x !! 0 * x !! 0 + x !! 1 ^ 2 == x !! 2 ^ 2)
 
-somfunc :: (Integer, Integer, Integer) -> (Integer, Integer, Integer)
-somfunc (i, j, n) = (a, b, c)
+-- krotkaSuma :: (Integer, Integer, Integer) -> Integer
+-- krotkaSuma krotka = wynik
+--   where
+--     wynik = krotka !! 0 + krotka !! 1 + krotka !! 2
+
+trojkipit :: Integer -> [[Integer]]
+trojkipit n = trojkiWynik
   where
-    (a, b, c) = generate (i, j)
+    trojkiWynik = [x | x <- trojki n, pit x, sum x == n]
