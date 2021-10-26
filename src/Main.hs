@@ -5,28 +5,33 @@
 -- pitagorejską bo wszystkie jej wartości mają wspólny dzielnik równy 2. Jeśli to niemożliwe podaj
 -- trójkę pitagorejską dla największego możliwego m gdzie m < n.
 
-import Data.Char (generalCategory)
-import Data.List ()
-import Text.ParserCombinators.ReadPrec (reset)
-
 trojki :: Integer -> [[Integer]]
 trojki n = [[x, y, z] | x <- [1 .. n], y <- [1 .. n], z <- [1 .. n]]
 
-pit :: [Integer] -> Bool
-pit x = wynoik
+czyTrojkaJestPiatgorejska :: [Integer] -> Bool
+czyTrojkaJestPiatgorejska x = wynik
   where
-    wynoik = (x !! 0 * x !! 0 + x !! 1 ^ 2 == x !! 2 ^ 2)
+    wynik = head x ^ 2 + x !! 1 ^ 2 == x !! 2 ^ 2
 
--- krotkaSuma :: (Integer, Integer, Integer) -> Integer
--- krotkaSuma krotka = wynik
---   where
---     wynik = krotka !! 0 + krotka !! 1 + krotka !! 2
+czyTrojkaJestPierwotna :: [Integer] -> Bool
+czyTrojkaJestPierwotna x = wynik
+  where
+    a = head x
+    b = x !! 1
+    c = x !! 1
+    wynik = gcd (gcd a b) c == 1
 
 trojkipit :: Integer -> [[Integer]]
 trojkipit n = trojkiWynik
   where
-    asd = [x | x <- trojki n, pit x, sum x == n]
+    asd = [x | x <- trojki n, czyTrojkaJestPiatgorejska x, czyTrojkaJestPierwotna x, sum x == n]
     trojkiWynik =
-      if length asd == 0
-        then if n > 11 then trojkipit (n -1) else []
+      if null asd
+        then -- 12 to namniejsza wartosc sumy trojki pitagorejskiej
+          if n > 11 then trojkipit (n -1) else []
         else asd
+
+zad1 :: Integer -> [Integer]
+zad1 n = wynik
+  where
+    wynik = head (trojkipit n)
