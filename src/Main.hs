@@ -3,10 +3,6 @@
 -- . Lista musi zawierać unikalne
 -- wartości posortowane w kolejności rosnącej.
 
-import Data.Char (generalCategory)
-import Data.List ()
-import Text.ParserCombinators.ReadPrec (reset)
-
 obfita :: Integer -> Bool
 obfita n = wynik
   where
